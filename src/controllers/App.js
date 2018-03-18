@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import styles from './App.css';
+// import styles from './App.css';
 import Layout from '../components/Layout/Layout';
 import withClass from '../hoc/withClass';
 import BurgerBuilder from './BurgerBuilder/BurgerBuilder';
@@ -16,4 +16,4 @@ class App extends Component {
 	}
 }
 
-export default withClass(App, styles.App);
+export default withClass(App);
