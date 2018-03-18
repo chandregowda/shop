@@ -1,0 +1,27 @@
+.Person {
+	width: 60%;
+	margin: 16px auto;
+	border: 1px solid silver;
+	box-shadow: 0 0 3px gray;
+	padding: 16px;
+	text-align: center;
+}
+
+.Person button {
+	border: 1px solid blue;
+	padding: 16px;
+	background-color: yellow;
+	color: black;
+	cursor: pointer;
+}
+.Person button:hover {
+	background-color: rgb(211, 231, 123);
+	/* color: black; */
+}
+
+@media (min-width: 500px) {
+	.Person {
+		width: 350px;
+		display: flex;
+	}
+}
