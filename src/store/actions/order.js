@@ -35,3 +35,43 @@ export const purchaseBurger = (orderData) => {
 			});
 	};
 };
+
+export const fetchOrderSuccess = (orders) => {
+	return {
+		type: actionTypes.FETCH_ORDER_SUCCESS,
+		payload: { orders }
+	};
+};
+
+export const fetchOrderFail = (error) => {
+	return {
+		type: actionTypes.FETCH_ORDER_FAIL,
+		payload: error
+	};
+};
+
+export const fetchOrderStart = (dispatch) => {
+	return {
+		type: actionTypes.FETCH_ORDER_START
+	};
+};
+
+export const fetchOrders = (dispatch) => {
+	return (dispatch) => {
+		dispatch(fetchOrderStart());
+		axios
+			.get('/orders.json')
+			.then((response) => {
+				console.log(response.data);
+				let fetchedOrders = [];
+				for (let key in response.data) {
+					fetchedOrders.push({ ...response.data[key], id: key });
+				}
+				dispatch(fetchOrderSuccess(fetchedOrders));
+			})
+			.catch((e) => {
+				console.log('Failed to get orders from firebase', e);
+				dispatch(fetchOrderFail(e));
+			});
+	};
+};

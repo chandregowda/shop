@@ -22,13 +22,32 @@ export default (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				loading: false,
-				orders: state.orders.concat({ id: action.payload.id, orderData: action.payload.orderData })
+				orders: state.orders.concat({ id: action.payload.id, ...action.payload.orderData })
 			};
 		case actionTypes.PURCHASE_BURGER_FAIL:
 			return {
 				...state,
 				loading: false
 			};
+		case actionTypes.FETCH_ORDER_START: {
+			return {
+				...state,
+				loading: true
+			};
+		}
+		case actionTypes.FETCH_ORDER_SUCCESS: {
+			return {
+				...state,
+				orders: action.payload.orders,
+				loading: false
+			};
+		}
+		case actionTypes.FETCH_ORDER_FAIL: {
+			return {
+				...state,
+				loading: false
+			};
+		}
 		default:
 			return state;
 	}
