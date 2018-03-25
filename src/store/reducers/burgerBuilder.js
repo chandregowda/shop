@@ -1,4 +1,6 @@
 import * as actionTypes from '../actions/actionTypes';
+import updateObject from '../utility';
+
 const DEFAULT_PRICE = 10;
 
 const INITIAL_STATE = {
@@ -40,8 +42,7 @@ export default (state = INITIAL_STATE, action) => {
 				totalPrice: state.totalPrice - INGREDIENT_PRICE_LIST[action.payload.ingredientName]
 			};
 		case actionTypes.SET_INGREDIENTS:
-			return {
-				...state,
+			return updateObject(state, {
 				ingredients: {
 					salad: action.payload.ingredients.salad,
 					bacon: action.payload.ingredients.bacon,
@@ -50,12 +51,9 @@ export default (state = INITIAL_STATE, action) => {
 				},
 				totalPrice: DEFAULT_PRICE,
 				error: false
-			};
+			});
 		case actionTypes.SET_ERROR_FETCH_INGREDIENTS:
-			return {
-				...state,
-				error: true
-			};
+			return updateObject(state, { error: true });
 		default:
 			return state;
 	}
