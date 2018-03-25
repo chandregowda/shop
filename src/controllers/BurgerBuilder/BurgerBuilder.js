@@ -29,15 +29,6 @@ class BurgerBuilder extends Component {
 
 	componentDidMount() {
 		this.props.onInitIngredients();
-		// axios
-		// 	.get('/ingredients.json')
-		// 	.then((response) => {
-		// 		console.log(response.data);
-		// 		this.setState({ ingredients: response.data });
-		// 	})
-		// 	.catch((e) => {
-		// 		console.log('Get Error', e);
-		// 	});
 	}
 	updatePurchasing = () => {
 		this.setState({ purchasing: true });
@@ -122,9 +113,9 @@ class BurgerBuilder extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		ings: state.ingredients,
-		price: state.totalPrice,
-		error: state.error
+		ings: state.burgerBuilder.ingredients,
+		price: state.burgerBuilder.totalPrice,
+		error: state.burgerBuilder.error
 	};
 };
 const mapDispatchToProps = (dispatch) => {

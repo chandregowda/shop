@@ -1,8 +1,9 @@
 import * as actionTypes from '../actions/actionTypes';
+const DEFAULT_PRICE = 10;
 
 const INITIAL_STATE = {
 	ingredients: null,
-	totalPrice: 4,
+	totalPrice: DEFAULT_PRICE,
 	error: false
 };
 
@@ -41,7 +42,13 @@ export default (state = INITIAL_STATE, action) => {
 		case actionTypes.SET_INGREDIENTS:
 			return {
 				...state,
-				ingredients: action.payload.ingredients,
+				ingredients: {
+					salad: action.payload.ingredients.salad,
+					bacon: action.payload.ingredients.bacon,
+					cheese: action.payload.ingredients.cheese,
+					meat: action.payload.ingredients.meat
+				},
+				totalPrice: DEFAULT_PRICE,
 				error: false
 			};
 		case actionTypes.SET_ERROR_FETCH_INGREDIENTS:
