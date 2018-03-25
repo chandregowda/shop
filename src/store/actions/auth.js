@@ -21,6 +21,20 @@ export const authFail = (error) => {
 	};
 };
 
+export const authLogout = () => {
+	return {
+		type: actionTypes.AUTH_LOGOUT
+	};
+};
+
+export const logout = (timeOut = 3600) => {
+	return (dispatch) => {
+		setTimeout(() => {
+			dispatch(authLogout());
+		}, timeOut * 1000);
+	};
+};
+
 export const auth = (email, password, isSignIn) => {
 	console.log('EMAIL: ', email);
 	console.log('Password: ', password);
@@ -45,6 +59,7 @@ export const auth = (email, password, isSignIn) => {
 				console.log('Successful Sign in/up');
 				console.log(response.data);
 				dispatch(authSuccess(response.data));
+				dispatch(logout(response.data.expiresIn));
 			})
 			.catch((e) => {
 				console.log('Authentication failed with error');

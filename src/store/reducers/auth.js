@@ -27,6 +27,10 @@ const authFail = (state, action) => {
 	});
 };
 
+const authLogout = (state, action) => {
+	return updateObject(state, { token: null, userId: null });
+};
+
 /**
 * @param {Object} state - Default application state
 * @param {Object} action - Action from action creator
@@ -40,6 +44,8 @@ export default (state = INITIAL_STATE, action) => {
 			return authSuccess(state, action);
 		case actionTypes.AUTH_FAIL:
 			return authFail(state, action);
+		case actionTypes.AUTH_LOGOUT:
+			return authLogout(state, action);
 		default:
 			return state;
 	}
