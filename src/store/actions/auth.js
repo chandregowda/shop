@@ -48,8 +48,8 @@ export const auth = (email, password, isSignIn) => {
 			})
 			.catch((e) => {
 				console.log('Authentication failed with error');
-				console.log(e);
-				dispatch(authFail(e));
+				console.log(e.response.data);
+				dispatch(authFail(e.response.data.error));
 			});
 	};
 };

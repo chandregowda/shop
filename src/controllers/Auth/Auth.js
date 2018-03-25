@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 import classes from './Auth.css';
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
-import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index';
+import Spinner from '../../components/UI/Spinner/Spinner';
 
 class Auth extends Component {
 	state = {
@@ -121,10 +123,17 @@ class Auth extends Component {
 				</Button>
 			</form>
 		);
-
+		if (this.props.loading) {
+			form = <Spinner />;
+		}
+		let errorMessage = '';
+		if (this.props.error) {
+			errorMessage = <p className={classes.ERROR}>{this.props.error.message}</p>;
+		}
 		return (
 			<div className={classes.Auth}>
 				{form}
+				{errorMessage}
 				<Button btnType="Danger" clicked={this.switchSignMethod}>
 					Switch to {this.state.isSignUp ? 'Sign In' : 'Sign Up'}{' '}
 				</Button>
@@ -135,7 +144,8 @@ class Auth extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		loading: state.loading
+		loading: state.auth.loading,
+		error: state.auth.error
 	};
 };
 
